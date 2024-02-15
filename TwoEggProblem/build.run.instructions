@@ -1,0 +1,46 @@
+1) I did the packaging, testing, and "infrastructure" on Ubuntu.
+
+2) I used Java 8 as Java 7 is out of support. 
+
+3) All source and runtime files reside in a single directory.
+
+4) For the  10x1000 values it takes about 15 minutes to execute in my environment. 
+These values can be tweaked by modifying NUM_EGGS or NUM_FLOORS in Mailine.java
+
+5) All 10000 threads are run at the same time. The output is tabulated once all threads are joined/completed. I did not experience any resource limits doing it this way (other than CPU time).
+
+6) The algorigthm is described by in-line code comments in compute.cpp, specifically for the 3 or more egg case
+   where things get tricky.
+
+To Build:
+---------
+a) unzip tim.rose.egg.problem.zip
+
+b) Determine the location of your the JNI include files in your JDK
+
+c) run "make JNI_INCLUDE=<my_jdk_include_location> all"
+e.g.
+
+>make JNI_INCLUDE=/usr/lib/jvm/java-8-openjdk-amd64/include all
+cc -c main.cpp -o main.o
+gcc -O -c compute.cpp -o compute.o
+gcc -O main.o compute.o -o testcompute
+javac -h . EggProblemTestThread.java
+gcc -O -I/usr/lib/jvm/java-8-openjdk-amd64/include -I/usr/lib/jvm/java-8-openjdk-amd64/include/linux -o eggjni.o -c eggjni.cpp
+gcc  -shared -o eggjni.so eggjni.o compute.o
+javac  Mainline.java
+
+To Run
+------
+type "java Mainline"
+
+The output will only appear near the end of the exeuction time.
+e.g.
+
+>java Mainline
+Building Height / Eggs    1     2     3     4     5     6     7     8     9    10
+   1       floors         1     1     1     1     1     1     1     1     1     1
+   2       floors         2     2     2     2     2     2     2     2     2     2
+   3       floors         3     2     2     2     2     2     2     2     2     2
+   4       floors         4     3     3     3     3     3     3     3     3     3
+
