@@ -1,0 +1,35 @@
+This bash shell script performs a static security scan by launching the OWASP dependency-check
+and filtering the result to list the CVEs that it found. No other information is displayed - just
+a unique list of CVEs. The depedency-check can be verbose and repetitive - hence the need for a 
+script that prunes the content.
+
+Prerequisites
+=============
+1) A recent version of Java 11 or higher installed with the java executable in the PATH and the
+   JAVA_HOME environment variable defined. (dependency-check is Java-based)
+2) dependency-check.sh installed and in the PATH. It can installed from here:
+    https://owasp.org/www-project-dependency-check/.
+3) A directory with files to be scanned.
+
+Usage
+=====
+> unique_cves.sh <pathname>
+
+where pathname is the directory to be scannedThis bash shell script performs a static security scan by launching the OWASP dependency-check
+and filtering the result to list the CVEs that it found. No other information is displayed - just
+a unique list of CVEs. The depedency-check can be verbose and repetitive - hence the need for a 
+script that prunes the content.
+
+Prerequisites
+=============
+1) A recent version of Java 11 or higher installed with the java executable in the PATH and the
+   JAVA_HOME environment variable defined. (dependency-check is Java-based)
+2) dependency-check.sh installed and in the PATH. It can installed from here:
+    https://owasp.org/www-project-dependency-check/.
+3) A directory with files to be scanned.
+
+Usage
+=====
+> unique_cves.sh <pathname>
+
+where pathname is the directory to be scanned
