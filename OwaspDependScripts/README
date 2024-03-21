@@ -23,6 +23,7 @@ Usage
 -----
 > owasp-check.py --sort {cve,cvss} --scanpath <pathname>
 
+where pathname is the directory to be scanned
 
 
 
