@@ -1,35 +1,42 @@
+BASH SCRIPT
+===========
 This bash shell script performs a static security scan by launching the OWASP dependency-check
 and filtering the result to list the CVEs that it found. No other information is displayed - just
 a unique list of CVEs. The depedency-check can be verbose and repetitive - hence the need for a 
 script that prunes the content.
 
-Prerequisites
-=============
-1) A recent version of Java 11 or higher installed with the java executable in the PATH and the
-   JAVA_HOME environment variable defined. (dependency-check is Java-based)
-2) dependency-check.sh installed and in the PATH. It can installed from here:
-    https://owasp.org/www-project-dependency-check/.
-3) A directory with files to be scanned.
-
 Usage
-=====
-> unique_cves.sh <pathname>
-
-where pathname is the directory to be scannedThis bash shell script performs a static security scan by launching the OWASP dependency-check
-and filtering the result to list the CVEs that it found. No other information is displayed - just
-a unique list of CVEs. The depedency-check can be verbose and repetitive - hence the need for a 
-script that prunes the content.
-
-Prerequisites
-=============
-1) A recent version of Java 11 or higher installed with the java executable in the PATH and the
-   JAVA_HOME environment variable defined. (dependency-check is Java-based)
-2) dependency-check.sh installed and in the PATH. It can installed from here:
-    https://owasp.org/www-project-dependency-check/.
-3) A directory with files to be scanned.
-
-Usage
-=====
+-----
 > unique_cves.sh <pathname>
 
 where pathname is the directory to be scanned
+
+
+PYTHON SCRIPT
+=============
+This python script also calls the OWASP dependency-check. It extracts the CVE, CVSSv3 score, and the DateAdded fields and 
+prints them out in sorted order. There are two sorting options: by CVE number or by CVSSv3 - which reflects the CVE severity.
+
+The python script uses Dictionaries, Tuples, Lists, String parsing, File I/O, and Command Line processing.
+
+Usage
+-----
+> owasp-check.py --sort {cve,cvss} --scanpath <pathname>
+
+
+
+
+Prerequisites
+-------------
+1) A recent version of Java 11 or higher installed with the java executable in the PATH and the
+   JAVA_HOME environment variable defined. (dependency-check is Java-based)
+2) dependency-check.sh installed and in the PATH. It can installed from here:
+    https://owasp.org/www-project-dependency-check/.
+3) A directory with files to be scanned.
+4) Python3 installed and in the PATH (for the Python script only)
+
+Files to Scan
+-------------
+A suggested binary to scan as a test is this one - 
+   https://mvnrepository.com/artifact/org.apache.spark/spark-core_2.13/3.5.1.
+As of March 2024 it contained several CVEs, both direct and transient via shaded classes.
