@@ -42,9 +42,7 @@ sort, scanpath = [args.sort, args.scanpath]
 # print(os.getcwd())
 # os.chdir("PythonScripts")
 
-subprocess.run(["c:\\Users\\Martin\\OwaspDepCheck\\bin\\dependency-check.bat", "--out", "results.csv", "--format", "CSV", "--scan", scanpath])
-# subprocess.run(["c:\\Users\\Martin\\OwaspDepCheck\\bin\\dependency-check.bat"])
-
+subprocess.run(["dependency-check.sh", "--out", "results.csv", "--format", "CSV", "--scan", scanpath])
 cveFile = open('results.csv', 'r', encoding="utf-8")
 
 # Identify column positions of interest from the header line so the code is not brittle
@@ -100,13 +98,6 @@ for line in cveFile:
        # Also put in CVSS list to sort by CVSS severity. In this case values need not be unique
        # but there is still one per CVE
        cvssList.append( myTuple )
-
-
-print ("unsorted =", cvssList)
-
-sortedList = sorted(cvssList, key=lambda x: x[1], reverse=True)    
-
-print ("sorted =", sortedList)
 
 
 
