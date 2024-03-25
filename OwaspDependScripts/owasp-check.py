@@ -6,22 +6,17 @@ import subprocess
 
 
 def printCvssList(myList):
-    # A crude method since no Python Tree structure exists to sort elements that are duplicates
-    # Find the highest value in the list, print it then remove it, then repeat and search the reduced list
+
+    # There is no obvious Python ordered collection that allows duplicates. Pass the tuple list to the
+    # sorted function instead and key of the 2nd element (cvss) for sorting
+    sortedList = sorted(myList, key=lambda x: x[1], reverse=True) 
     print ("CVE            CVSSv3                DateAdded")
     print ("----------------------------------------------")
 
-    while len(myList) > 0:
-        highest = float(0.0)
-        for  value in myList:
-            cve, cvss, datea = value
-            cvssAsFloat = float(cvss)
-            if cvssAsFloat > highest: 
-                highest = cvssAsFloat
-                foundRecord = value
-        cve, cvss, datea = foundRecord
+    for field in sortedList:
+        cve, cvss, datea = field
         print(cve, "  ", cvss, "  ", datea)
-        myList.remove(foundRecord)
+
 
 
 def printCveDict(myDict):    
@@ -47,7 +42,8 @@ sort, scanpath = [args.sort, args.scanpath]
 # print(os.getcwd())
 # os.chdir("PythonScripts")
 
-subprocess.run(["dependency-check.sh", "--out", "results.csv", "--format", "CSV", "--scan", scanpath])
+subprocess.run(["c:\\Users\\Martin\\OwaspDepCheck\\bin\\dependency-check.bat", "--out", "results.csv", "--format", "CSV", "--scan", scanpath])
+# subprocess.run(["c:\\Users\\Martin\\OwaspDepCheck\\bin\\dependency-check.bat"])
 
 cveFile = open('results.csv', 'r', encoding="utf-8")
 
@@ -104,6 +100,14 @@ for line in cveFile:
        # Also put in CVSS list to sort by CVSS severity. In this case values need not be unique
        # but there is still one per CVE
        cvssList.append( myTuple )
+
+
+print ("unsorted =", cvssList)
+
+sortedList = sorted(cvssList, key=lambda x: x[1], reverse=True)    
+
+print ("sorted =", sortedList)
+
 
 
 if sort == "cve":
