@@ -1,0 +1,1 @@
+This is a Java-based program that uses HTTP, supports 2 endpoints, sends/receives JSON requests, returns results based on the request contents.
